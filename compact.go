@@ -7,10 +7,19 @@ func Strings(in []string) []string {
 		return in
 	}
 
+	lastI := len(in) - 1
 	for i, s := range in {
-		if s == zeroString {
-			in = append(in[:i], in[i+1:]...)
+		if s == zeroString { // remove it from in
+			switch {
+			case i == 0:
+				in = in[1:lastI]
+			case i == lastI:
+				continue
+			default:
+				in = append(in[:i-1], in[i:]...)
+			}
 		}
 	}
+
 	return in
 }
