@@ -3,6 +3,25 @@ package compact
 import "testing"
 
 type foo []string
+type address []string
+
+func Test_Strings_on_address(t *testing.T) {
+	loose := address{"100 Fillmore Street", ""}
+
+	if len(loose) != 2 {
+		t.Fatalf("%v", len(loose))
+	}
+
+	compact := Strings(loose)
+
+	if len(compact) != 1 {
+		t.Fatalf("didn't compact %v", compact)
+	}
+
+	if compact[0] != "100 Fillmore Street" {
+		t.Fatalf("%v", compact[0])
+	}
+}
 
 func Test_Strings_on_foo(t *testing.T) {
 	loose := foo{"", "a", "", "b", "", "c", ""}
@@ -30,10 +49,10 @@ func Test_Strings_on_foo(t *testing.T) {
 	}
 
 	// basicically, just shouldn't blow up
-	Strings(nil)
-	Strings(foo{})
-	Strings(foo{""})
-	Strings(foo{"", ""})
+	loose = Strings(nil)
+	loose = Strings(foo{})
+	loose = Strings(foo{""})
+	loose = Strings(foo{"", ""})
 }
 
 func Test_Strings_on_string_slice(t *testing.T) {
@@ -46,7 +65,7 @@ func Test_Strings_on_string_slice(t *testing.T) {
 	compact := Strings(loose)
 
 	if len(compact) != 3 {
-		t.Fatalf("didn't compact %v", len(compact))
+		t.Fatalf("didn't compact %#v", compact)
 	}
 
 	if compact[0] != "a" {
@@ -62,8 +81,8 @@ func Test_Strings_on_string_slice(t *testing.T) {
 	}
 
 	// basicically, just shouldn't blow up
-	Strings(nil)
-	Strings([]string{})
-	Strings([]string{""})
-	Strings([]string{"", ""})
+	loose = Strings(nil)
+	loose = Strings([]string{})
+	loose = Strings([]string{""})
+	loose = Strings([]string{"", ""})
 }
