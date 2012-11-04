@@ -1,10 +1,15 @@
 package compact
 
+
 var zeroString string
 
 func Strings(in []string) []string {
 	if in == nil {
 		return in
+	}
+
+	if len(in) == 1 && in[0] == zeroString {
+		return []string{}
 	}
 
 	lastI := len(in) - 1

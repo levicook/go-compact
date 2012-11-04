@@ -26,4 +26,10 @@ func Test_Strings(t *testing.T) {
 	if compact[2] != "c" {
 		t.Fatalf("%v", compact[2])
 	}
+
+	// basicically, just shouldn't blow up
+	Strings(nil)
+	Strings([]string{})
+	Strings([]string{""})
+	Strings([]string{"", ""})
 }
