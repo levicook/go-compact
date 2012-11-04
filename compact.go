@@ -1,6 +1,5 @@
 package compact
 
-
 var zeroString string
 
 func Strings(in []string) []string {
